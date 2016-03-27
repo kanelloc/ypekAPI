@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
+use Illuminate\Http\Request;
 use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -10,63 +12,55 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
-
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
-
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function getSignup()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        return view('auth.signup');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function postSignup(Request $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
+    	//Validate the values from the inputs
+        $this->validate($request,[
+        	'email' => 'required|unique:users|email|max:255',
+        	'username' => 'required|unique:users|alpha_dash|min:3|max:20',
+			'password' => 'required|min:6',
+        	]);
+        //Create the user account to the db using User model
+        User::create([
+        	'email' => $request->input('email'),
+        	'username' => $request->input('username'),
+        	'password' => bcrypt($request->input('password')),
+        	]);
+
+        return redirect()->route('index')->with('info', 'Your acount has been created!');
+
+    }
+    //--Sign in section
+
+    public function getSignin()
+    {
+    	return view('auth.signin');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
+    public function postSignin(Request $request)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        //-Validation for the user infos
+        $this->validate($request,[
+            'email'=> 'required',
+            'password' => 'required',
+            ]);
+        //-Check for wrong user details
+        if (!Auth::attempt($request->only(['email', 'password']), $request->has('remember'))) {
+            return redirect()->back()->with('alert', 'Wrong User information');
+        }
+
+        return redirect()->route('index')->with('success', 'You are now Signed in.');
     }
+    //--Sign out section
+    public function getSignout()
+    {
+        Auth::logout();
+        return redirect()->route('index')->with('info', 'You are singed out.See you later.');
+    }
+
 }

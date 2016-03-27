@@ -12,9 +12,16 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-
-    Route::get('/', function () {
-        return view('welcome');
-    });
+	//----------------Index root----------------------
+	Route::get('/', 'HomeController@index')->name('index');
+	//----------------Authentication------------------
+	//--Sign-Up
+	Route::get('/signup', 'Auth\AuthController@getSignup')->name('auth.signup');
+	Route::post('/signup', 'Auth\AuthController@postSignup');
+	//--Sign-In
+	Route::get('/signin', 'Auth\AuthController@getSignin')->name('auth.signin');
+	Route::post('/signin','Auth\AuthController@postSignin');
+	//--Sign-Out
+	Route::get('/signout', 'Auth\AuthController@getSignout')->name('auth.signout');
 
 });
