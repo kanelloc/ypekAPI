@@ -53,6 +53,11 @@ class AuthController extends Controller
         if (!Auth::attempt($request->only(['email', 'password']), $request->has('remember'))) {
             return redirect()->back()->with('alert', 'Wrong User information');
         }
+        
+        //Alert if the user is Admin
+        if (Auth::user()->admin) {
+            return redirect()->route('index')->with('success', 'You are now Signed in as Admin.');
+        }
 
         return redirect()->route('index')->with('success', 'You are now Signed in.');
     }
