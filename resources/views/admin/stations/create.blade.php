@@ -32,6 +32,14 @@
 					<input type="text" id="lng" class="form-control" readonly>
 				</div>
 			</div>
+		</div>
+
+		<div class="form-group">
+			<button type="submit" class="btn btn-primary">
+				<i class="fa fa-btn fa-floppy-o">
+				Save
+				</i>
+			</button>
 		</div>	
 	</form>
 
