@@ -14,6 +14,11 @@
     <link href='https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <style>
+        #map {
+        height: 300px;
+        width: 100%;
+    </style>
 
 </head>
 <body>
@@ -22,8 +27,11 @@
         @include('layouts.partials.alerts')
 		@yield('content')
 	</div>
+    @yield('gmap')
 	<!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDk5WUI1INIP_8LV7kmAfhoLO4SWI2vZ-s&callback=initMap&libraries=places"
+    async defer></script>
 </body>
 </html>

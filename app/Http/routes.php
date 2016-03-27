@@ -25,7 +25,11 @@ Route::group(['middleware' => ['web']], function () {
 	Route::get('/signout', 'Auth\AuthController@getSignout')->name('auth.signout');
 	//----------------User Section-------------------------
 	Route::get('/upanel', 'UserController@userPanel')->name('userpanel')->middleware('auth');
-	//----------------Admin Section------------------------
-	Route::get('/adminpanel', 'AdminController@adminPanel')->name('adminpanel')->middleware('isAdmin');
-
 });
+//-------------------Admin Section-------------------------
+Route::group(['middleware'=> ['web','isAdmin']], function (){
+	Route::get('/adminpanel', 'AdminController@adminPanel')->name('adminpanel');
+	Route::resource('stations', 'StationsController');
+});
+
+
