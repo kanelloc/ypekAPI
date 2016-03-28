@@ -46,10 +46,17 @@ class StationsController extends Controller
         return redirect()->back()->with('success','Station Created');
 
     }
-    
-    //Delete a row
-    public function destroy()
+
+    public function show()
     {
-        # code...
+        dd('Show element');
+    }
+    
+    //Delete a row from the table
+    public function destroy($stationPass)
+    {
+        $deletedStation = Station::where('stationPass',$stationPass);
+        $deletedStation->delete();
+        return redirect()->back()->with('success', 'Station deleted succesfully');
     }
 }

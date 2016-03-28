@@ -22,9 +22,14 @@
 								<span class="glyphicon glyphicon-pencil"></span>
 							</a>
 						</td>
-						<td><a href="#" class="btn btn-danger btn-xs">
-								<span class="glyphicon glyphicon-trash"></span>
-							</a>
+						<td>
+							<form action="{{ route('stations.destroy',[$station->stationPass])}}" method="post">
+								{{csrf_field()}}
+								<input type="hidden" name="_method" value="DELETE">
+								<button type="submit" class="btn btn-danger btn-xs">
+									<i class="glyphicon glyphicon-trash"></i>
+								</button>
+							</form>
 						</td>
 						<?php $count++; ?>
 					</tr>
