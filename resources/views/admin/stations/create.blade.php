@@ -3,7 +3,8 @@
 @section('content')
 	<h3>Add a new Station</h3>
 
-	<form>
+	<form method="POST" action="/stations" enctype="multipart/form-data">
+		{{csrf_field()}}
 		<div class="form-group">
 			<label for="stationName">Station Name:</label>
 			<input type="text" name="stationName" id="stationName" class="form-control">
