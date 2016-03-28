@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Station;
 use App\Http\Requests;
@@ -12,7 +13,11 @@ class StationsController extends Controller
 {
 	public function index()
 	{
-		//
+        $count = 1;
+        $stations = DB::table('stations')->get();
+		return view('admin.stations.indexStation', [
+            'stations' => $stations,
+            'count' => $count]);
 	}
 
 
