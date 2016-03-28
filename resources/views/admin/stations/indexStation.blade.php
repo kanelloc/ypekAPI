@@ -8,8 +8,8 @@
 			<thead>
 				<tr>
 					<th>#</th>
-					<th>Station Name</th>
-					<th>Edit</th>
+					<th>Station Pass</th>
+					<th>Show</th>
 					<th>Delete</th>
 				</tr>
 			</thead>
@@ -19,7 +19,7 @@
 						<td>{{$count}}</td>
 						<td>{{$station->stationPass}}</td>
 						<td><a href="#" class="btn btn-primary btn-xs">
-								<span class="glyphicon glyphicon-pencil"></span>
+								<span class="glyphicon glyphicon-eye-open"></span>
 							</a>
 						</td>
 						<td>

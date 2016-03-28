@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 
 class StationsController extends Controller
 {
+    //stations GET request----------------------
 	public function index()
 	{
         $count = 1;
@@ -20,12 +21,13 @@ class StationsController extends Controller
             'count' => $count]);
 	}
 
-
+    //stations/create GET request----------------------
     public function create()
     {
     	return view('admin.stations.create');
     }
 
+    //stations POST request----------------------------
     public function store(Request $request)
     {
         //Validate the values from the inputs
@@ -52,7 +54,7 @@ class StationsController extends Controller
         dd('Show element');
     }
     
-    //Delete a row from the table
+    //Delete a row from the table---------------------------
     public function destroy($stationPass)
     {
         $deletedStation = Station::where('stationPass',$stationPass);
