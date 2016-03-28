@@ -31,7 +31,7 @@ class StationsController extends Controller
         //Validate the values from the inputs
         $this->validate($request,[
             'stationName' => 'required',
-            'stationPass' => 'required',
+            'stationPass' => 'required|unique:stations',
             'lat' =>'required',
             'lng' => 'required',
             ]);

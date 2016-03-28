@@ -5,14 +5,22 @@
 
 	<form method="POST" action="/stations" enctype="multipart/form-data">
 		{{csrf_field()}}
-		<div class="form-group">
+		<div class="form-group{{$errors->has('stationName') ? ' has-error' : ''}}">
 			<label for="stationName">Station Name:</label>
 			<input type="text" name="stationName" id="stationName" class="form-control">
+			<!--Show error message -->
+				@if($errors->has('stationName'))
+					<span class="help-block">{{$errors->first('stationName')}}</span>
+				@endif
 		</div>
 
-		<div class="form-group">
+		<div class="form-group{{$errors->has('stationPass') ? ' has-error' : ''}}">
 			<label for="stationPass">Station Password:</label>
 			<input type="text" name="stationPass" id="stationPass" class="form-control">
+			<!--Show error message -->
+				@if($errors->has('stationPass'))
+					<span class="help-block">{{$errors->first('stationPass')}}</span>
+				@endif
 		</div>
 		
 		<div class="form-group">
@@ -22,15 +30,23 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<div class="form-group">
-				<label for="lat">lattitude:</label>
-				<input type="text" id="lat" class="form-control" name="lat" readonly>
+				<div class="form-group{{$errors->has('lat') ? ' has-error' : ''}}">
+					<label for="lat">lattitude:</label>
+					<input type="text" id="lat" class="form-control" name="lat" readonly>
+					<!--Show error message -->
+					@if($errors->has('lat'))
+						<span class="help-block">{{$errors->first('lat')}}</span>
+					@endif
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="form-group">
+				<div class="form-group{{$errors->has('lng') ? ' has-error' : ''}}">
 					<label for="lng">longtitude:</label>
 					<input type="text" id="lng" class="form-control" name="lng" readonly>
+					<!--Show error message -->
+					@if($errors->has('lat'))
+						<span class="help-block">{{$errors->first('lng')}}</span>
+					@endif
 				</div>
 			</div>
 		</div>
@@ -46,15 +62,6 @@
 
 	<label for="map">Enter Station's Location Manualy:</label>
 	<div id="map"></div>
-	@if(count($errors) > 0)
-		<div class="alert alert-danger">
-			<ul>
-				@foreach($errors->all() as $error)
-					<li>{{$error}}</li>
-				@endforeach
-			</ul>
-		</div>
-	@endif
 	<script>
 		var initMap = function(){
 			var map = new google.maps.Map(document.querySelector('#map'), {
