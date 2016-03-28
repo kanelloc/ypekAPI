@@ -46,4 +46,10 @@ class StationsController extends Controller
         return redirect()->back()->with('success','Station Created');
 
     }
+    
+    //Delete a row
+    public function destroy()
+    {
+        # code...
+    }
 }
