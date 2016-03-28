@@ -24,13 +24,13 @@
 			<div class="col-md-6">
 				<div class="form-group">
 				<label for="lat">lattitude:</label>
-				<input type="text" id="lat" class="form-control" readonly>
+				<input type="text" id="lat" class="form-control" name="lat" readonly>
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="lng">longtitude:</label>
-					<input type="text" id="lng" class="form-control" readonly>
+					<input type="text" id="lng" class="form-control" name="lng" readonly>
 				</div>
 			</div>
 		</div>
@@ -46,6 +46,15 @@
 
 	<label for="map">Enter Station's Location Manualy:</label>
 	<div id="map"></div>
+	@if(count($errors) > 0)
+		<div class="alert alert-danger">
+			<ul>
+				@foreach($errors->all() as $error)
+					<li>{{$error}}</li>
+				@endforeach
+			</ul>
+		</div>
+	@endif
 	<script>
 		var initMap = function(){
 			var map = new google.maps.Map(document.querySelector('#map'), {
