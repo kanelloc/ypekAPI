@@ -48,10 +48,12 @@ class StationsController extends Controller
         return redirect()->back()->with('success','Station Created');
 
     }
-
-    public function show()
-    {
-        dd('Show element');
+    //Show each station informations------------------------
+    public function show($stationPass)
+    {   
+        $stationShow = Station::where('stationPass', $stationPass)->first();
+        return view('admin.stations.showStation', [
+            'stationShow' => $stationShow]);
     }
     
     //Delete a row from the table---------------------------

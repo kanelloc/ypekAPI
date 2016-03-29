@@ -18,7 +18,7 @@
 					<tr class="success">
 						<td>{{$count}}</td>
 						<td>{{$station->stationPass}}</td>
-						<td><a href="#" class="btn btn-primary btn-xs">
+						<td><a href="{{route('stations.show',[$station->stationPass])}}" class="btn btn-primary btn-xs">
 								<span class="glyphicon glyphicon-eye-open"></span>
 							</a>
 						</td>
