@@ -20,9 +20,6 @@
 				@if(Auth::check() && !Auth::user()->admin)
 					<li><a href="{{route('userpanel')}}">User-panel</a></li>
 				@endif
-				@if(Auth::check() && Auth::user()->admin)
-					<li><a href="{{route('adminpanel')}}">Admin-panel</a></li>
-				@endif
 			</ul>
 			
 			<!-- Right Side Of Navbar -->

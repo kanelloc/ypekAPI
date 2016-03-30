@@ -23,15 +23,29 @@
 
 </head>
 <body>
-    @include('layouts.partials.navigation')
-    <div id="wrapper">
-        <div class="page-wrapper">
-            <div class="container-fluid">
-                @include('layouts.partials.alerts')
-                @yield('content')
+    @if(!Auth::check())
+        @include('layouts.partials.navigation')
+        <div class="container">
+            @include('layouts.partials.alerts')
+            @yield('content')
+        </div>
+    @elseif(Auth::check() && Auth::user()->admin)
+        @include('layouts.partials.navigationAdmin')
+        <div id="wrapper">
+            <div class="page-wrapper">
+                <div class="container">
+                    @include('layouts.partials.alerts')
+                    @yield('content')
+                </div>
             </div>
         </div>
-    </div>
+    @elseif(Auth::check() && !Auth::user()->admin)
+        @include('layouts.partials.navigation')
+        <div class="container">
+            @include('layouts.partials.alerts')
+            @yield('content')
+        </div>
+    @endif
     @yield('gmap')
 	<!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

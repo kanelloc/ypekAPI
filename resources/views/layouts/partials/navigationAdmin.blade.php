@@ -8,6 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <!-- Branding Image -->
 			<a class="navbar-brand" href="{{ url('/') }}">Grimapy</a>
 		</div>
 		<!-- Top Menu Items -->
@@ -33,20 +34,11 @@
 			</ul>
 
 			<ul class="nav navbar-nav side-nav">
-                <li class="active">
-                    <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                <li>
+                    <a href="/stations"><i class="fa fa-fw fa-table"></i> Station Panel</a>
                 </li>
                 <li>
-                    <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-                </li>
-                <li>
-                    <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-                </li>
-                <li>
-                    <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-                </li>
-                <li>
-                    <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                    <a href="/stations/create"><i class="fa fa-fw fa-edit"></i>Create a station</a>
                 </li>
             </ul>
 		</div>
