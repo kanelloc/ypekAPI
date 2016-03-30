@@ -52,8 +52,13 @@ class StationsController extends Controller
     public function show($stationPass)
     {   
         $stationShow = Station::where('stationPass', $stationPass)->first();
-        return view('admin.stations.showStation', [
+        if (count($stationShow) !==1) {
+            return redirect()->back()->with('alert',"Don't be a cheater!");
+        }
+        else{
+            return view('admin.stations.showStation', [
             'stationShow' => $stationShow]);
+        }
     }
     
     //Edit each station information,csv parse GET request----
