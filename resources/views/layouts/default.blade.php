@@ -24,10 +24,14 @@
 </head>
 <body>
     @include('layouts.partials.navigation')
-	<div class="container">
-        @include('layouts.partials.alerts')
-		@yield('content')
-	</div>
+    <div id="wrapper">
+        <div class="page-wrapper">
+            <div class="container-fluid">
+                @include('layouts.partials.alerts')
+                @yield('content')
+            </div>
+        </div>
+    </div>
     @yield('gmap')
 	<!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
