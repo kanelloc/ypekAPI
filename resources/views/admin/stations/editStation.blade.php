@@ -19,15 +19,15 @@
 		<div class="form-group">
 		  <label for="measureType">Τύπος Ρύπου:</label>
 		  <select class="form-control" id="measureType" name="measureType">
-		    @foreach($dirtTypes::all() as $dirtType)
-		    	<option value="{{ $dirtType }}">{{ $dirtType }}</option>
+		    @foreach($dirtTypes::all() as $dirtType => $code)
+		    	<option value="{{ $code }}">{{ $dirtType }}</option>
 		    @endforeach
 		  </select>
 		</div>
 
 		<div class="form-group">
 			<label for="csvFile">CSV:</label>
-			<input type="file" name="csvFiles" id="csvFile" class="form-control">
+			<input type="file" accept=".dat, .csv, .xlsx" name="csvFiles" id="csvFile" class="form-control">
 		</div>
 
 		<div class="form-group">
