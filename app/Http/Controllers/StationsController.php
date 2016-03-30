@@ -39,8 +39,8 @@ class StationsController extends Controller
             ]);
         
         Station::create([
-            'stationName' => $request->input('stationName'),
-            'stationPass' => strtoupper($request->input('stationPass')),
+            'stationName' => mb_strtoupper($request->input('stationName')),
+            'stationPass' => str_replace(' ', '',strtoupper($request->input('stationPass'))),
             'lng' => $request->input('lng'),
             'lat' => $request->input('lat')
             ]);
@@ -56,6 +56,14 @@ class StationsController extends Controller
             'stationShow' => $stationShow]);
     }
     
+    //Edit each station information,csv parse GET request----
+    public function edit($stationPass)
+    {
+        $stationEdit = Station::where('stationPass', $stationPass)->first();
+        return view('admin.stations.editStation', [
+            'stationEdit' => $stationEdit]);
+    }
+
     //Delete a row from the table---------------------------
     public function destroy($stationPass)
     {
