@@ -1,7 +1,8 @@
 @extends('layouts.default')
 
 @section('content')
-	<h3>Add a new Station</h3>
+	<h3>Insert a new Station.</h3>
+	<hr>
 
 	<form method="POST" action="/stations" enctype="multipart/form-data">
 		{{csrf_field()}}

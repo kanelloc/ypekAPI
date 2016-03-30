@@ -1,7 +1,8 @@
 @extends('layouts.default')
 
 @section('content')
-	<h3>This is the index stations</h3>
+	<h3>Station's Home</h3>
+	<hr>
 	<div class="container">
 		<h4>Stations Table</h4>
 		<table class="table table-bordered table-striped">
