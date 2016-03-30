@@ -56,7 +56,7 @@ class AuthController extends Controller
         
         //Alert if the user is Admin
         if (Auth::user()->admin) {
-            return redirect()->route('index')->with('success', 'You are now Signed in as Admin.');
+            return redirect()->route('stations.create')->with('success', 'You are now Signed in as Admin.');
         }
 
         return redirect()->route('index')->with('success', 'You are now Signed in.');

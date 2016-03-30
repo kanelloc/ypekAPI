@@ -18,8 +18,9 @@
 				@if(Auth::check())
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							Welcome
-							{{Auth::user()->username}} <span class="caret"></span>
+							<span class="fa fa-user"></span>
+							{{Auth::user()->username}} 
+							<span class="caret"></span>
 						</a>
 
 						<ul class="dropdown-menu" role="menu">
@@ -39,6 +40,9 @@
                 </li>
                 <li>
                     <a href="/stations/create"><i class="fa fa-fw fa-edit"></i>Create a station</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-fw fa-users"></i>Registered Users</a>
                 </li>
             </ul>
 		</div>
