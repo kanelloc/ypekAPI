@@ -1,5 +1,4 @@
 @extends('layouts.default')
-
 @section('content')
 	<div class="jumbotron">
 		<h1>This is the admin panel</h1>
