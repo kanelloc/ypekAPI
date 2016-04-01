@@ -97,6 +97,7 @@ class StationsController extends Controller
         //Csv Upload-------------------------------------------------
         $uploadedFile = Input::file('csvFile');
         $file = fopen($uploadedFile, "r");
+        
         while (($fileop = fgetcsv($file, 1000, ",")) !== FALSE) {
             $fileop[0] = date("y-m-d", strtotime($fileop[0]));
             $station = Station::where('stationPass', $stationPass)->first();
