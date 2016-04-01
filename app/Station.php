@@ -14,5 +14,10 @@ class Station extends Model
         'lat',
         'lng'
     ];
+
+    public function measures()
+    {
+    	return $this->hasMany('App\Measure');
+    }
     
 }

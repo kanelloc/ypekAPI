@@ -30,6 +30,7 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware'=> ['web','isAdmin']], function (){
 	Route::get('/adminpanel', 'AdminController@adminPanel')->name('adminpanel');
 	Route::resource('stations', 'StationsController');
+	Route::post('stations/{stationPass}/edit', 'StationsController@editUpload')->name('admin.editUpload');
 });
 
 

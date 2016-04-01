@@ -5,11 +5,11 @@
 @section('content')
 	<h1>Edit Station {{$stationEdit->stationName}}</h1>
 	<hr>
-	<form method="POST" action="" enctype="multipart/form-data">
+	<form method="POST" action="/stations/{{$stationEdit->stationPass}}/edit" enctype="multipart/form-data">
 		{{csrf_field()}}
 		<div class="form-group">
 		  <label for="measureYear">Χρονιά Μετρήσεων:</label>
-		  <select class="form-control" id="measureYear" name="MeasureYear">
+		  <select class="form-control" id="measureYear" name="measureYear">
 		    @foreach($years::all() as $year)
 		    	<option value="{{ $year }}">{{ $year }}</option>
 		    @endforeach
@@ -25,9 +25,13 @@
 		  </select>
 		</div>
 
-		<div class="form-group">
+		<div class="form-group{{$errors->has('csvFile') ? ' has-error' : ''}}">
 			<label for="csvFile">CSV:</label>
-			<input type="file" accept=".dat, .csv, .xlsx" name="csvFiles" id="csvFile" class="form-control">
+			<input type="file" accept=".dat, .csv, .xlsx" name="csvFile" id="csvFile" class="form-control">
+			<!--Show error message -->
+				@if($errors->has('csvFile'))
+					<span class="help-block">{{$errors->first('csvFile')}}</span>
+				@endif
 		</div>
 
 		<div class="form-group">
