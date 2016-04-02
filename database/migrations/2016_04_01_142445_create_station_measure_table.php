@@ -14,6 +14,7 @@ class CreateStationMeasureTable extends Migration
     {
         Schema::create('station_measures', function(Blueprint $table){
             $table->increments('id');
+            $table->string('fileName');
             $table->integer('station_id')->unsigned();
 
             $table->foreign('station_id')->references('id')->on('stations')->onDelete('cascade');

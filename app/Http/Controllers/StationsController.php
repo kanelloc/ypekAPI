@@ -54,15 +54,18 @@ class StationsController extends Controller
     //Show each station informations------------------------
     public function show($stationPass)
     {   
+        $count = 1;
         $stationShow = Station::where('stationPass', $stationPass)->first();
+        $stationShowId = $stationShow->id;
+        $measuresShow = Measure::where('station_id', $stationShowId)->groupBy('fileName')->get();
         if (count($stationShow) !==1) {
             return redirect()->back()->with('alert',"Don't be a cheater!");
         }
         else{
-            // return view('admin.stations.showStation', [
-            // 'stationShow' => $stationShow]);
-            // return $stationShow->measures;
-            return $stationShow->measures;
+            return view('admin.stations.showStation', [
+            'stationShow' => $stationShow,
+            'measuresShow' => $measuresShow,
+            'count' => $count]);
         }
     }
     
@@ -96,12 +99,14 @@ class StationsController extends Controller
 
         //Csv Upload-------------------------------------------------
         $uploadedFile = Input::file('csvFile');
+        $uploadedFileName = Input::file('csvFile')->getClientOriginalName();
         $file = fopen($uploadedFile, "r");
         
         while (($fileop = fgetcsv($file, 1000, ",")) !== FALSE) {
             $fileop[0] = date("y-m-d", strtotime($fileop[0]));
             $station = Station::where('stationPass', $stationPass)->first();
             $station->measures()->create([
+                'fileName' => "$uploadedFileName",
                 'year' => $year,
                 'type' => $type,
                 'date' => "$fileop[0]",

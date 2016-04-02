@@ -9,6 +9,7 @@ class Measure extends Model
 	protected $table = 'station_measures';
 
 	protected $fillable = [
+		'fileName',
 		'year',
 		'type',
 		'date',
