@@ -84,6 +84,7 @@ class StationsController extends Controller
         $deletedStation->delete();
         return redirect()->back()->with('success', 'Station deleted succesfully');
     }
+    //Show and Delete each station's profile information-------------------------
     //Upload station Measurements POST request-----------------------------------
     public function editUpload($stationPass, Request $request)
     {
@@ -100,13 +101,14 @@ class StationsController extends Controller
         //Csv Upload-------------------------------------------------
         $uploadedFile = Input::file('csvFile');
         $uploadedFileName = Input::file('csvFile')->getClientOriginalName();
+        $uploadedFileName = str_replace('#', '-', $uploadedFileName);
         $file = fopen($uploadedFile, "r");
         
         while (($fileop = fgetcsv($file, 1000, ",")) !== FALSE) {
             $fileop[0] = date("y-m-d", strtotime($fileop[0]));
             $station = Station::where('stationPass', $stationPass)->first();
             $station->measures()->create([
-                'fileName' => "$uploadedFileName",
+                'fileName' => $uploadedFileName,
                 'year' => $year,
                 'type' => $type,
                 'date' => "$fileop[0]",
@@ -137,5 +139,13 @@ class StationsController extends Controller
             ]);
         }
         return redirect()->back()->with('success','Station Measurements Uploaded');
+    }
+    //Delete each .dat file from the db
+    public function destroyCsv($stationPass, $fileName)
+    {
+        $stationLink = Station::where('stationPass', $stationPass)->first();
+        $stationLinkId = $stationLink->id;
+        $deletedCsv = Measure::where('station_id', $stationLinkId)->where('fileName', $fileName)->delete();
+        return redirect()->back()->with('sucess','Csv File deleted succesfully');
     }
 }

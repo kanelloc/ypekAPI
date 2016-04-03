@@ -23,7 +23,9 @@
 						<td>{{$measures->year}}</td>
 						<td>{{$measures->type}}</td>
 						<td class="col-md-1" align="center">
-							<form action="">
+							<form action="{{route('admin.destroyCsv',[$stationShow->stationPass, $measures->fileName])}}" method="POST">
+							{{csrf_field()}}
+							<input type="hidden" name="_method" value="DELETE">
 								<button type="submit" class="btn btn-danger btn-xs">
 									<i class="glyphicon glyphicon-trash"></i>
 								</button>

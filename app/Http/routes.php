@@ -30,7 +30,9 @@ Route::group(['middleware' => ['web']], function () {
 Route::group(['middleware'=> ['web','isAdmin']], function (){
 	Route::get('/adminpanel', 'AdminController@adminPanel')->name('adminpanel');
 	Route::resource('stations', 'StationsController');
+	//Post and delete Csv Files for each station
 	Route::post('stations/{stationPass}/edit', 'StationsController@editUpload')->name('admin.editUpload');
+	Route::delete('measures/{stationsPass}/{fileName}', 'StationsController@destroyCsv')->name('admin.destroyCsv');
 });
 
 
