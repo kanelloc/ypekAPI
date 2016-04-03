@@ -56,12 +56,13 @@ class StationsController extends Controller
     {   
         $count = 1;
         $stationShow = Station::where('stationPass', $stationPass)->first();
-        $stationShowId = $stationShow->id;
-        $measuresShow = Measure::where('station_id', $stationShowId)->groupBy('fileName')->get();
+        
         if (count($stationShow) !==1) {
             return redirect()->back()->with('alert',"Don't be a cheater!");
         }
         else{
+            $stationShowId = $stationShow->id;
+            $measuresShow = Measure::where('station_id', $stationShowId)->groupBy('fileName')->get();
             return view('admin.stations.showStation', [
             'stationShow' => $stationShow,
             'measuresShow' => $measuresShow,
