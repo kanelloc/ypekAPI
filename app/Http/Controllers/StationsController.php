@@ -104,42 +104,48 @@ class StationsController extends Controller
         $uploadedFileName = Input::file('csvFile')->getClientOriginalName();
         $uploadedFileName = str_replace('#', '-', $uploadedFileName);
         $file = fopen($uploadedFile, "r");
-        
-        while (($fileop = fgetcsv($file, 1000, ",")) !== FALSE) {
-            $fileop[0] = date("y-m-d", strtotime($fileop[0]));
-            $station = Station::where('stationPass', $stationPass)->first();
-            $station->measures()->create([
-                'fileName' => $uploadedFileName,
-                'year' => $year,
-                'type' => $type,
-                'date' => "$fileop[0]",
-                '00'=>$fileop[1],
-                '01'=>$fileop[2],
-                '02'=>$fileop[3],
-                '03'=>$fileop[4],
-                '04'=>$fileop[5],
-                '05'=>$fileop[6],
-                '06'=>$fileop[7],
-                '07'=>$fileop[8],
-                '08'=>$fileop[9],
-                '09'=>$fileop[10],
-                '10'=>$fileop[11],
-                '11'=>$fileop[12],
-                '12'=>$fileop[13],
-                '13'=>$fileop[14],
-                '14'=>$fileop[15],
-                '15'=>$fileop[16],
-                '16'=>$fileop[17],
-                '17'=>$fileop[18],
-                '18'=>$fileop[19],
-                '19'=>$fileop[20],
-                '20'=>$fileop[21],
-                '21'=>$fileop[22],
-                '22'=>$fileop[23],
-                '23'=>$fileop[24],
-            ]);
+        //Validation Variables for type,year file mismatch-----------------------
+        $val1 = strpos($uploadedFileName, $type);
+        $val2 = strpos($uploadedFileName, $year);
+        if ($val1 === false || $val2 === false) {
+            return redirect()->back()->with('alert','File mismatch with year and type!');
+        }else{
+            while (($fileop = fgetcsv($file, 1000, ",")) !== FALSE) {
+                $fileop[0] = date("y-m-d", strtotime($fileop[0]));
+                $station = Station::where('stationPass', $stationPass)->first();
+                $station->measures()->create([
+                    'fileName' => $uploadedFileName,
+                    'year' => $year,
+                    'type' => $type,
+                    'date' => "$fileop[0]",
+                    '00'=>$fileop[1],
+                    '01'=>$fileop[2],
+                    '02'=>$fileop[3],
+                    '03'=>$fileop[4],
+                    '04'=>$fileop[5],
+                    '05'=>$fileop[6],
+                    '06'=>$fileop[7],
+                    '07'=>$fileop[8],
+                    '08'=>$fileop[9],
+                    '09'=>$fileop[10],
+                    '10'=>$fileop[11],
+                    '11'=>$fileop[12],
+                    '12'=>$fileop[13],
+                    '13'=>$fileop[14],
+                    '14'=>$fileop[15],
+                    '15'=>$fileop[16],
+                    '16'=>$fileop[17],
+                    '17'=>$fileop[18],
+                    '18'=>$fileop[19],
+                    '19'=>$fileop[20],
+                    '20'=>$fileop[21],
+                    '21'=>$fileop[22],
+                    '22'=>$fileop[23],
+                    '23'=>$fileop[24],
+                ]);
+            }
+            return redirect()->back()->with('success','Station Measurements Uploaded');           
         }
-        return redirect()->back()->with('success','Station Measurements Uploaded');
     }
     //Delete each .dat file from the db----------------------------------------
     public function destroyCsv($stationPass, $fileName)
