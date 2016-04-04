@@ -89,7 +89,7 @@ class StationsController extends Controller
     //Upload station Measurements POST request-----------------------------------
     public function editUpload($stationPass, Request $request)
     {
-        //Validate the values from the inputs
+        //Validate the values from the inputs------------------------------------
         $this->validate($request,[
             'measureYear' => 'required',
             'measureType' => 'required',
@@ -99,7 +99,7 @@ class StationsController extends Controller
         $year = $request->input('measureYear');
         $type = $request->input('measureType');
 
-        //Csv Upload-------------------------------------------------
+        //Csv Upload-------------------------------------------------------------
         $uploadedFile = Input::file('csvFile');
         $uploadedFileName = Input::file('csvFile')->getClientOriginalName();
         $uploadedFileName = str_replace('#', '-', $uploadedFileName);
@@ -141,7 +141,7 @@ class StationsController extends Controller
         }
         return redirect()->back()->with('success','Station Measurements Uploaded');
     }
-    //Delete each .dat file from the db
+    //Delete each .dat file from the db----------------------------------------
     public function destroyCsv($stationPass, $fileName)
     {
         $stationLink = Station::where('stationPass', $stationPass)->first();
