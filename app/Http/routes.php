@@ -23,10 +23,9 @@ Route::group(['middleware' => ['web']], function () {
 	Route::post('/signin','Auth\AuthController@postSignin');
 	//--Sign-Out
 	Route::get('/signout', 'Auth\AuthController@getSignout')->name('auth.signout');
-	//----------------User Section-------------------------
-	
 });
 
+//----------------User Section-------------------------
 Route::group(['middleware'=> ['web', 'auth']], function (){
 	Route::get('/profile', 'UserController@showProfile')->name('user.profile');
 	Route::post('/profile', 'UserController@getApiKey')->name('user.getApikey');
