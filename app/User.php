@@ -18,4 +18,10 @@ class User extends Authenticatable
         'password', 
         'remember_token',
     ];
+
+    public function user_details()
+    {
+        return $this->hasOne('App\User_Details');
+
+    }
 }

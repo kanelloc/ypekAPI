@@ -24,7 +24,12 @@ Route::group(['middleware' => ['web']], function () {
 	//--Sign-Out
 	Route::get('/signout', 'Auth\AuthController@getSignout')->name('auth.signout');
 	//----------------User Section-------------------------
-	Route::get('/profile', 'UserController@showProfile')->name('user.profile')->middleware('auth');
+	
+});
+
+Route::group(['middleware'=> ['web', 'auth']], function (){
+	Route::get('/profile', 'UserController@showProfile')->name('user.profile');
+	Route::post('/profile', 'UserController@getApiKey')->name('user.getApikey');
 });
 //-------------------Admin Section-------------------------
 Route::group(['middleware'=> ['web','isAdmin']], function (){
