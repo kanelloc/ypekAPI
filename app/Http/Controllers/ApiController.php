@@ -49,7 +49,7 @@ class ApiController extends Controller
     	if ($api_key == $active_api) 
     	{
     		//Counter for the stations
-    		// $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_absolute');
+    		$active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_absolute');
     		$stationShow = Station::where('stationPass', $stationPass)->first();
     		$details = $stationShow->measures()->where('type', $type)->where('date', $date)->first();
     		$result = array(
@@ -59,7 +59,7 @@ class ApiController extends Controller
                 'fileName'      => $details->fileName,
                 'type'          => $details->type,
                 'date'          => $details->date,
-                $hour         	=> $details->$hour,
+                'time-'.$hour   => $details->$hour,
             );
     		return $result;
     	}
