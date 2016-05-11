@@ -34,6 +34,7 @@ Route::group(['middleware'=> ['web', 'auth']], function (){
 //---------------Use api Section------------------------
 Route::group(['middleware'=> ['web', 'apiKey']], function (){
 	Route::get('/api/v1/{api_key}/stations', 'ApiController@showApiStations')->name('api.showApiStations');
+	Route::get('/api/v1/{api_key}/{stationPass}/{type}/{date}', 'ApiController@showSpesificValue')->name('api.showSpesificValue');
 });
 
 //-------------------Admin Section-------------------------
