@@ -73,36 +73,6 @@ class ApiController extends Controller
     		]);
     	}
     }
-
-    public function showAllstationValues($api_key, $type, $date, $hour)
-    {
-    	$active_user = Auth::user();
-		$userId = Auth::user()->id;
-		$active_api = $active_user->with('user_details')->findOrFail($userId)->user_details->api_key;
-    	if ($api_key == $active_api) 
-    	{
-    		//Counter for the stations
-    		// $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_absolute');
-    		//$data = array();
-    		$measures = Measure::where('type', $type)->where('date', $date)->first();
-    		// foreach ($measures as $measure) {
-    		// 	$stationShow = $measure->station()->get();
-    		// 	$data[] = $stationShow;
-    		// }
-    		var_dump($measures);
-    	}
-    	else
-    	{
-    		return Response::json([
-    			'error' => [
-    				'message' => 'Wrong api key authentication',
-    				'code' => '215'
-    			]
-    		]);
-    	}	
-    }
-
-
     //Transformation for stations--------------------------------------------------------------------------------
     public function transform($stations)
     {
