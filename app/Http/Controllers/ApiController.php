@@ -22,6 +22,8 @@ class ApiController extends Controller
 		$active_api = $active_user->with('user_details')->findOrFail($userId)->user_details->api_key;
     	if ($api_key == $active_api) 
     	{
+    		//Counter for the stations
+    		$active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_stations');
     		$stations = Station::all();
     		return $stations;
     	}
