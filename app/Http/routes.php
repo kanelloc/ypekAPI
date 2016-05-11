@@ -30,6 +30,12 @@ Route::group(['middleware'=> ['web', 'auth']], function (){
 	Route::get('/profile', 'UserController@showProfile')->name('user.profile');
 	Route::post('/profile', 'UserController@getApiKey')->name('user.getApikey');
 });
+
+//---------------Use api Section------------------------
+Route::group(['middleware'=> ['web', 'apiKey']], function (){
+	Route::get('/api/v1/{api_key}/stations', 'ApiController@showApiStations')->name('api.showApiStations');
+});
+
 //-------------------Admin Section-------------------------
 Route::group(['middleware'=> ['web','isAdmin']], function (){
 	Route::get('/adminpanel', 'AdminController@adminPanel')->name('adminpanel');

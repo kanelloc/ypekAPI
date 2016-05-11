@@ -27,4 +27,6 @@
 			<button type="submit" class="btn btn-primary">Get Api key</button>
 		</div>
 	</form>
+
+	<a href="{{route('api.showApiStations',[$active_api])}}" class="btn btn-info" role="button">Show stations Json format</a>
 @stop
