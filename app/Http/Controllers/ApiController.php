@@ -61,7 +61,8 @@ class ApiController extends Controller
                 'fileName'      => $details->fileName,
                 'type'          => $details->type,
                 'date'          => $details->date,
-                'time-'.$hour   => $details->$hour,
+                'time'          => $hour,
+                'value'         => $details->$hour,
             );
     		return $result;
     	}
