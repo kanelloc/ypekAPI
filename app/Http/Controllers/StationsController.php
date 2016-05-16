@@ -111,6 +111,11 @@ class StationsController extends Controller
             return redirect()->back()->with('alert','File mismatch with year and type!');
         }else{
             while (($fileop = fgetcsv($file, 1000, ",")) !== FALSE) {
+                for ($x=0; $x < sizeof($fileop); $x++) { 
+                    if ($fileop[$x] == -9999) {
+                        $fileop[$x] = 0;
+                    }
+                }
                 $fileop[0] = date("y-m-d", strtotime($fileop[0]));
                 $station = Station::where('stationPass', $stationPass)->first();
                 $station->measures()->create([
