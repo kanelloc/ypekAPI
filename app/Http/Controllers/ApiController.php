@@ -47,6 +47,7 @@ class ApiController extends Controller
     	$active_user = Auth::user();
 		$userId = Auth::user()->id;
 		$active_api = $active_user->with('user_details')->findOrFail($userId)->user_details->api_key;
+        $timeConvert = intval(preg_replace('/[^0-9]+/', '', $hour), 10);
     	if ($api_key == $active_api) 
     	{
     		//Counter for the stations
@@ -61,7 +62,7 @@ class ApiController extends Controller
                 'fileName'      => $details->fileName,
                 'type'          => $details->type,
                 'date'          => $details->date,
-                'time'          => $hour,
+                'time'          => strval($timeConvert).':00',
                 'value'         => $details->$hour,
             );
     		return $result;
