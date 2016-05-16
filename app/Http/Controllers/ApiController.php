@@ -25,6 +25,7 @@ class ApiController extends Controller
     	{
     		//Counter for the stations
     		$active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_stations');
+            $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_all');
     		$stations = Station::all();
     		return Response::json([
     			'stations' => $this->transform($stations)
@@ -50,6 +51,7 @@ class ApiController extends Controller
     	{
     		//Counter for the stations
     		$active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_absolute');
+            $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_all');
     		$stationShow = Station::where('stationPass', $stationPass)->first();
     		$details = $stationShow->measures()->where('type', $type)->where('date', $date)->first();
     		$result = array(
@@ -85,6 +87,7 @@ class ApiController extends Controller
             $data = array();
             //Counter for the stations
             $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_average');
+            $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_all');
             $stationShow = Station::where('stationPass', $stationPass)->first();
             $details = $stationShow->measures()->where('type', $type)->whereBetween('date',[$date1, $date2])->get();
             foreach ($details as $detail) {
