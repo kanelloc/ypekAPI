@@ -1,5 +1,7 @@
 // @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+
+
 @media(min-width:768px) {
 	.side-nav {
 		position: fixed;
@@ -25,9 +27,9 @@
 	padding: 0;
 }
 
-#page-wrapper {
+.page-wrapper {
     width: 100%;
-    padding: 0;
+    padding-top: 65px;
     background-color: #fff;
 }
 

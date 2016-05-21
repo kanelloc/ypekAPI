@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
 		<div class="navbar-header">
 			<!-- Collapsed Hamburger -->
@@ -42,7 +42,7 @@
                     <a href="/stations/create"><i class="fa fa-fw fa-edit"></i>Create a station</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fa fa-fw fa-users"></i>Registered Users</a>
+                    <a href="/adminpanel"><i class="fa fa-fw fa-users"></i>Infos & Statistics</a>
                 </li>
             </ul>
 		</div>
