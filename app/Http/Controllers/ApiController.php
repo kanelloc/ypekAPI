@@ -112,6 +112,78 @@ class ApiController extends Controller
             //Counter for the stations
             $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_average');
             $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_all');
+            //----------------------------------All stations------------------------------------
+            if ($stationPass == 'all') {
+                $stationShow = Measure::where('type', $type)->whereBetween('date',[$date1, $date2])->with('station')->get();
+                foreach ($stationShow as $show) {
+                    $newData[] = array(
+                        'name'                  =>      $show->station->stationName,
+                        'date'                  =>      $show->date,
+                        'daily average'         =>      ($show->am0 
+                                                        + 
+                                                        $show->am1
+                                                        + 
+                                                        $show->am2
+                                                        + 
+                                                        $show->am3
+                                                        + 
+                                                        $show->am4
+                                                        + 
+                                                        $show->am5
+                                                        + 
+                                                        $show->am6
+                                                        + 
+                                                        $show->am7
+                                                        + 
+                                                        $show->am8
+                                                        + 
+                                                        $show->am9
+                                                        + 
+                                                        $show->am10
+                                                        + 
+                                                        $show->am11
+                                                        + 
+                                                        $show->pm12
+                                                        + 
+                                                        $show->pm13
+                                                        + 
+                                                        $show->pm14
+                                                        + 
+                                                        $show->pm15
+                                                        + 
+                                                        $show->pm16
+                                                        + 
+                                                        $show->pm17
+                                                        + 
+                                                        $show->pm18
+                                                        + 
+                                                        $show->pm19
+                                                        + 
+                                                        $show->pm20
+                                                        + 
+                                                        $show->pm21
+                                                        + 
+                                                        $show->pm22
+                                                        + 
+                                                        $show->pm23)/24);
+                }
+                $result = array();
+                $counter = 0;
+                foreach ($newData as $newData2) {
+                    $name = $newData2['name'];
+                    if (isset($result[$name])) {
+                         $result[$name][] = $newData2;
+                      } else {
+                         $result[$name] = array($newData2);
+                      }
+
+                }
+                
+                return $result;
+            }
+
+
+            //-----------------------------------Specific station-------------------------------
             $stationShow = Station::where('stationPass', $stationPass)->first();
             $details = $stationShow->measures()->where('type', $type)->whereBetween('date',[$date1, $date2])->get();
             foreach ($details as $detail) {
