@@ -53,6 +53,28 @@ class ApiController extends Controller
     		//Counter for the stations
     		$active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_absolute');
             $active_user->with('user_details')->findOrFail($userId)->user_details->increment('counter_all');
+
+            //------------------------ ALL stations -----------------------------------------------
+
+            if ($stationPass == 'all') {
+                $stationShow = Measure::where('type', $type)->where('date', $date)->with('station')->get();
+                foreach ($stationShow as $show) {
+                    $dataAll[] = array(
+                        'name'          =>      $show->station->stationName,
+                        'station lat'   =>      $show->station->lat,
+                        'station lng'   =>      $show->station->lng,
+                        'filename'      =>      $show->fileName,
+                        'type'          =>      $show->type,
+                        'date'          =>      $show->date,
+                        'time'          =>      strval($timeConvert).':00',
+                        'value'         =>      $show->$hour,
+                        );
+                }
+                return $dataAll;
+            }
+
+            //------------------------ Specific station ----------------------------------------
+
     		$stationShow = Station::where('stationPass', $stationPass)->first();
     		$details = $stationShow->measures()->where('type', $type)->where('date', $date)->first();
     		$result = array(
