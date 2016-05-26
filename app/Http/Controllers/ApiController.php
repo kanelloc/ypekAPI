@@ -119,6 +119,8 @@ class ApiController extends Controller
                     $newData[] = array(
                         'name'                  =>      $show->station->stationName,
                         'date'                  =>      $show->date,
+                        'lat'                   =>      $show->station->lat,
+                        'lng'                   =>      $show->station->lng,
                         'daily average'         =>      ($show->am0 
                                                         + 
                                                         $show->am1
@@ -167,19 +169,44 @@ class ApiController extends Controller
                                                         + 
                                                         $show->pm23)/24);
                 }
+
                 $result = array();
                 $counter = 0;
+                $insideCounter = 0;
+
                 foreach ($newData as $newData2) {
                     $name = $newData2['name'];
                     if (isset($result[$name])) {
-                         $result[$name][] = $newData2;
+                        $result[$name][] = $newData2;
                       } else {
-                         $result[$name] = array($newData2);
+                        $result[$name] = array($newData2);
                       }
 
                 }
                 
-                return $result;
+                foreach ($result as $key => $value) {
+                    foreach ($value as $key2 => $value2) {
+                        $insideCounter++;
+                        $newArr[$key][] = $value2['daily average'];
+                        $counter += $value2['daily average'];
+                    }
+                    $average_stations_all[] = array(
+                        'name'              =>  $value2['name'],
+                        'lat'               =>  $value2['lat'],
+                        'lng'               =>  $value2['lng'],
+                        'average'           =>  $counter/$insideCounter);
+                    $counter = 0;
+                    $insideCounter = 0;
+                }
+                // foreach ($newArr as $key => $value) {
+                //     foreach ($value as $key2 => $value1) {
+                //         $counter += $value1;
+                //     }
+                //     $summaries[$key] = $counter;
+                //     $counter = 0;
+                // }
+                
+                return $average_stations_all;
             }
 
 
@@ -226,8 +253,8 @@ class ApiController extends Controller
             $average_all = array_sum($new)/$count;
             $result = array(
                 'station name'      => $stationShow->stationName,
-                'station lat'       => $stationShow->lat,
-                'station lng'       => $stationShow->lng,
+                'lat'       => $stationShow->lat,
+                'lng'       => $stationShow->lng,
                 'average'           => $average_all
                 );
             return $result;
