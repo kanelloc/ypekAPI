@@ -5,7 +5,7 @@ The project contains:
 * As a developer you can register to the site and request a unique API key. Then with RESTful techniques you can make several requests and take JSON responses.
 * As a user you can visit the second test site where you can add location's information in a form and see in real time the responses.
 
-##Technologies we used
+## Technologies we used
 * PHP
 * MySQL
 * Laravel Framework
